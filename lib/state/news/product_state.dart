@@ -3,20 +3,18 @@ import 'package:built_collection/built_collection.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:task_requirements/core/models/product.dart';
 
-part 'news_state.g.dart';
+part 'product_state.g.dart';
 
-enum LoadProductsOperation { loadProducts }
+enum ProductOperation { loadProducts, deleteProduct, createProduct }
 
-// The implementation uses BuiltValue syntax
-abstract class NewsState implements Built<NewsState, NewsStateBuilder>, GlobalState {
-  // BuiltValue boilerplate
-  factory NewsState([void Function(NewsStateBuilder) updates]) = _$NewsState;
+abstract class ProductState implements Built<ProductState, ProductStateBuilder>, GlobalState {
+  factory ProductState([void Function(ProductStateBuilder) updates]) = _$ProductState;
 
-  NewsState._();
+  ProductState._();
 
   // Initial State: Data fields should have default values
-  factory NewsState.initial() {
-    return NewsState(
+  factory ProductState.initial() {
+    return ProductState(
       (b) => b
         ..articles.replace([]) // Initial empty list
         ..operationsState = BuiltMap<Object, OperationState>().toBuilder(),

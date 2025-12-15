@@ -3,8 +3,9 @@ import 'package:task_requirements/core/models/product.dart';
 
 class NewsCard extends StatelessWidget {
   final Product product;
+  final void Function() onDelete;
 
-  const NewsCard({super.key, required this.product});
+  const NewsCard({super.key, required this.product, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +50,24 @@ class NewsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Title
-                  Text(
-                    product.title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          product.title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      IconButton(onPressed: onDelete, icon: Icon(Icons.delete)),
+                    ],
                   ),
                   const SizedBox(height: 4.0),
                   // Description

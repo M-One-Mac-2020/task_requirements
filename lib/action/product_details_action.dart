@@ -12,13 +12,12 @@ class ProductDetailsAction extends Action<ProductDetailsState> {
 
   @override
   Future<ProductDetailsState> reduce() async {
-    debugPrint("=======");
     int? id = ProductService.instance.selectedProductId;
 
     if (id == null) {
       return state;
     }
-    final res = await _apiService.fetchProduct(id!);
+    final res = await _apiService.fetchProduct(id);
 
     return state.rebuild((data) {
       return data.product = res;

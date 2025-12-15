@@ -1,33 +1,33 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'news_state.dart';
+part of 'product_state.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$NewsState extends NewsState {
+class _$ProductState extends ProductState {
   @override
   final BuiltList<Product> articles;
   @override
   final BuiltMap<Object, OperationState> operationsState;
 
-  factory _$NewsState([void Function(NewsStateBuilder)? updates]) =>
-      (NewsStateBuilder()..update(updates))._build();
+  factory _$ProductState([void Function(ProductStateBuilder)? updates]) =>
+      (ProductStateBuilder()..update(updates))._build();
 
-  _$NewsState._({required this.articles, required this.operationsState})
+  _$ProductState._({required this.articles, required this.operationsState})
     : super._();
   @override
-  NewsState rebuild(void Function(NewsStateBuilder) updates) =>
+  ProductState rebuild(void Function(ProductStateBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  NewsStateBuilder toBuilder() => NewsStateBuilder()..replace(this);
+  ProductStateBuilder toBuilder() => ProductStateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is NewsState &&
+    return other is ProductState &&
         articles == other.articles &&
         operationsState == other.operationsState;
   }
@@ -43,15 +43,16 @@ class _$NewsState extends NewsState {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'NewsState')
+    return (newBuiltValueToStringHelper(r'ProductState')
           ..add('articles', articles)
           ..add('operationsState', operationsState))
         .toString();
   }
 }
 
-class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
-  _$NewsState? _$v;
+class ProductStateBuilder
+    implements Builder<ProductState, ProductStateBuilder> {
+  _$ProductState? _$v;
 
   ListBuilder<Product>? _articles;
   ListBuilder<Product> get articles =>
@@ -64,9 +65,9 @@ class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
   set operationsState(MapBuilder<Object, OperationState>? operationsState) =>
       _$this._operationsState = operationsState;
 
-  NewsStateBuilder();
+  ProductStateBuilder();
 
-  NewsStateBuilder get _$this {
+  ProductStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
       _articles = $v.articles.toBuilder();
@@ -77,24 +78,24 @@ class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
   }
 
   @override
-  void replace(NewsState other) {
-    _$v = other as _$NewsState;
+  void replace(ProductState other) {
+    _$v = other as _$ProductState;
   }
 
   @override
-  void update(void Function(NewsStateBuilder)? updates) {
+  void update(void Function(ProductStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  NewsState build() => _build();
+  ProductState build() => _build();
 
-  _$NewsState _build() {
-    _$NewsState _$result;
+  _$ProductState _build() {
+    _$ProductState _$result;
     try {
       _$result =
           _$v ??
-          _$NewsState._(
+          _$ProductState._(
             articles: articles.build(),
             operationsState: operationsState.build(),
           );
@@ -107,7 +108,7 @@ class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
         operationsState.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-          r'NewsState',
+          r'ProductState',
           _$failedField,
           e.toString(),
         );
