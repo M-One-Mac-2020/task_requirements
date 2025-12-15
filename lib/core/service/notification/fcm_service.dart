@@ -7,82 +7,8 @@ import 'package:task_requirements/core/service/notification/local_notification_h
 import 'package:http/http.dart' as http;
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-
-// import 'package:logger/logger.dart';
 import 'package:googleapis_auth/auth_io.dart' as auth;
 
-//
-//
-// class NotificationService {
-//
-//
-//   Future<String> getAccessToken() async {
-//     Map<String, String> serviceAccountJson = {
-//       "type": "service_account",
-//       "project_id": "cook-and-way",
-//       "private_key_id": "123b725f9bb41e19183b3651084e352207e25f8c",
-//       "private_key":
-//       "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDjaYIXKrUMo3H8\nHKzhV6N07NTOstlyNuGbmMDN6NO0IshSw+X7LGQYGTMq/HxJBOk8v0jAwJoJSdnN\nfV+oE1yH9GYnufRn8Vp231mu7V645KQgeWzOsW+hA3c9+LulYCwvE6W0bkpCUdjw\nQfz3sasw/gDTkuJ4IeLEZPVS6VsF7L7I49QVMWIBnx1DSLM74uc3P04UFcC1ZnIC\nuAn9fgmjNZ8wSo/htpJWjIWhstcXJOR0kFP1I4XlklrgSs/FppaDciMh7YKi3rtO\ng3WvqTPzQx+hULcdifvPtg+1DGissH3oILdXBnw6ef1Lhy8shFLdNuhxIX7Tzphk\nwOPmmpLrAgMBAAECggEAD6iFoRO7OJ4ObKYKz09J/XSLKJpO95rIyP5pFCR6YzZb\n5bsAXF2PnMsrZ0PQSPTSHHEtULxSPt57ZTdDPV7r6Z6N5CFdL0UCjhnN4ooMkh2I\nIYZK1CaKgaMr9DPqs7XeBPXM3JIVgeCB1/UrNmDg4TQ0GV1NQ6lNpGkxLR7NOiiU\nKSRjLWI+ktbuBa+/msYHB61/+2ky6kuDcBcw0jfzsK/DCaWhIljR7BoNh6oAtCE/\nRVRNAtlveFdX09OTo8NJmp8VZUSO0wGD4jxX4KV5ipWycjuLvzXcu0uBSQfiBy7S\n5Zn0TGpdWcOwkEVxsCht/vM5Nc4euEWMMc5iv6iywQKBgQD/B9EFvX9ErOCYeF8c\ntiNStLKiGfoQ6u5U9zsgigrl90HPEZ/90/SKJpJapjLkH2XSnvBP1dOByU/4F6ru\n/NbERxrlC5X2vuqTU+HFIsZthwDj+zaHUwEXnYAghO7REQXjnRZXh+Oq/x6YMB5d\ndSt+AvGNrKt0ow71WgceRDN1qwKBgQDkRtCVHRjFtGveemx6nAIGC8fj5AeHUD7j\nALrlV9WhS5jU4/CeI4uchA3uaNG01ubYDJ87HWMAv19Wb1z+aEJeiZHflNO53hdV\n+VBb4SPkWGOlXyHC8AcmcwqHw8cS2mQqkKiEuGCjq1ehz9CGvXBdwIfkK0SRlfht\nRNejTzWXwQKBgB+mE613r8SRA6pIPd1tSQLpg8WUHbFdxkfrCn5mQyX4wkT1Nfql\nBBLk6IKxX11p/BPgP4hYy8+ucOsj3MWdwPVIsbC8+FZPqQKxhTIWt7M97sFcGo8+\noMMSe6UNeimdyDJP+0bPiVReJqjSR+JnOQeBTAK96+UkmyWdj4aVBiHTAoGAfrX4\nLe0axRNjFPlroZtbXDPJ3uvCag/W+HZ9R7S7tm6aBQIJnB4q7tQ2T3ILhZAMTzyi\nXlPvkoinyPjD68u/m25NdIfOBswKtARR4M5V9/hAR5lIykYmEeelnrrDk+l51E67\n2//kVLVVTVJnc4NQDhpC1BpYU1+lqDGgaNwc6YECgYBd+Qg30kBwvKMk+SNWXjj3\nAb+hFBILhpdkBi/ABSAEVg9CXMOGANBULo0C9fMTSMT85BxQoiGo6WuFR7h6dMs/\n0KaF1ZdsVaGXKAxXRJkcdH5G5k9OGMiWXGkJsqN21tSQ/qEtpxnuxR1+mPiUj0AC\nH96Zj+ftLLt1tGscenV38A==\n-----END PRIVATE KEY-----\n",
-//       "client_email":
-//       "cook-way-notification@cook-and-way.iam.gserviceaccount.com",
-//       "client_id": "107847712474135896073",
-//       "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-//       "token_uri": "https://oauth2.googleapis.com/token",
-//       "auth_provider_x509_cert_url":
-//       "https://www.googleapis.com/oauth2/v1/certs",
-//       "client_x509_cert_url":
-//       "https://www.googleapis.com/robot/v1/metadata/x509/cook-way-notification%40cook-and-way.iam.gserviceaccount.com",
-//       "universe_domain": "googleapis.com"
-//     };
-//     List<String> scopes = [
-//       "https://www.googleapis.com/auth/userinfo.email",
-//       "https://www.googleapis.com/auth/firebase.database",
-//       "https://www.googleapis.com/auth/firebase.messaging",
-//     ];
-//     http.Client client = await auth.clientViaServiceAccount(
-//       auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
-//       scopes,
-//     );
-//     auth.AccessCredentials credentials =
-//     await auth.obtainAccessCredentialsViaServiceAccount(
-//       auth.ServiceAccountCredentials.fromJson(serviceAccountJson),
-//       scopes,
-//       client,
-//     );
-//     client.close();
-//     return credentials.accessToken.data;
-//   }
-//
-//   Future<void> sendNotification(
-//       String token,
-//       String title,
-//       String body,
-//       Map<String, dynamic> data1,
-//       ) async {
-//     String serverTokenKey = await getAccessToken();
-//     String endPoint =
-//         "https://fcm.googleapis.com/v1/projects/cook-and-way/messages:send";
-//     Map<String, dynamic> message = {
-//       "message": {
-//         "token": token,
-//         "notification": {"title": title, "body": body},
-//         "data": {"userId": ""},
-//       }
-//     };
-//
-//     http.Response res = await http.post(
-//       Uri.parse(endPoint),
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': 'Bearer $serverTokenKey',
-//       },
-//       body: jsonEncode(message),
-//     );
-//     Logger().d('status code => ${res.statusCode}');
-//     if (res.statusCode == 200 || res.statusCode == 201) {
-//       Logger().d('message send success');
-//     } else {
-//       Logger().d('message send failed');
 
 class FCMService {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -136,6 +62,7 @@ class FCMService {
   }
 
   Future<String> getAccessToken() async {
+    //project settings/service account / generate private new key
     Map<String, String> serviceAccountJson = {
       "type": "service_account",
       "project_id": "fir-app-ab020",

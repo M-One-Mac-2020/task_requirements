@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:task_requirements/core/models/alticle.dart';
-import 'package:task_requirements/core/service/api/api_service.dart';
 import 'package:task_requirements/core/service/api/news_service.dart';
 
 class NewsProvider extends ChangeNotifier {

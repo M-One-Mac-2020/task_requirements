@@ -1,12 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:task_requirements/action/load_articles_action.dart';
 import 'package:task_requirements/core/service/api/api_service.dart';
 import 'package:task_requirements/core/service/firebase_service.dart';
 import 'package:task_requirements/core/service/notification/notification_service.dart';
-import 'package:task_requirements/provider/news_provider.dart';
+import 'package:task_requirements/state/news_state.dart';
 import 'package:task_requirements/widgets/news_card.dart';
-
+import 'package:async_redux/async_redux.dart';
 import '../core/models/alticle.dart';
 
 class NewsScreen extends StatefulWidget {
@@ -17,14 +17,15 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  late NewsProvider newsProvider;
+  late Store<AppState> store;
   final apiService = ApiService();
 
   @override
   void initState() {
-    newsProvider = NewsProvider(apiService);
+    store = Store<AppState>(initialState: AppState.initial());
+    store.dispatch(LoadArticlesAction(apiService));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      newsProvider.loadArticles();
+      // newsProvider.loadArticles();
       await FirebaseService.initializeFirebase();
       await NotificationService.initialize();
     });
@@ -34,14 +35,14 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   void dispose() {
-    newsProvider.dispose();
+    // newsProvider.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: newsProvider,
+    return StoreProvider<AppState>(
+      store: store,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Top News'),
@@ -54,20 +55,41 @@ class _NewsScreenState extends State<NewsScreen> {
             ),
           ],
         ),
-        body: Consumer<NewsProvider>(
-          builder: (context, newsProvider, child) {
-            if (newsProvider.isLoading) {
+        body: StoreConnector<AppState, _NewsScreenViewModel>(
+          converter: (store) => _NewsScreenViewModel.fromStore(store),
+          builder: (context, vm) {
+            if (vm.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
+            final articles = vm.articles;
+            if (articles.isEmpty) {
+              return const Center(child: Text("No articles found."));
+            }
             return ListView.builder(
-              itemCount: newsProvider.articles?.length ?? 0,
+              itemCount: articles.length,
               itemBuilder: (context, index) {
-                return NewsCard(article: newsProvider.articles?[index] ?? Article.empty());
+                return NewsCard(article: articles[index]);
               },
             );
           },
         ),
       ),
+    );
+  }
+}
+
+class _NewsScreenViewModel {
+  final List<Article> articles;
+  final bool isLoading;
+
+  _NewsScreenViewModel({required this.articles, required this.isLoading});
+
+  factory _NewsScreenViewModel.fromStore(Store<AppState> store) {
+    final loadingState = store.state.getOperationState(Operation.loadArticles);
+
+    return _NewsScreenViewModel(
+      articles: store.state.articles.toList(), // Convert BuiltList back to List
+      isLoading: loadingState.isInProgress,
     );
   }
 }
