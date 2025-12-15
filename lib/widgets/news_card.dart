@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:task_requirements/core/models/alticle.dart';
+import 'package:task_requirements/core/models/product.dart';
 
 class NewsCard extends StatelessWidget {
-  final Article article;
+  final Product product;
 
-  const NewsCard({super.key, required this.article});
+  const NewsCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -18,11 +18,11 @@ class NewsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Image (takes up about 30% of the width)
-            article.imageUrl.isNotEmpty
+            product.images.first.isNotEmpty
                 ? ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.network(
-                      article.imageUrl,
+                      product.images.first,
                       width: 100,
                       height: 100,
                       fit: BoxFit.cover,
@@ -50,7 +50,7 @@ class NewsCard extends StatelessWidget {
                 children: [
                   // Title
                   Text(
-                    article.title,
+                    product.title,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class NewsCard extends StatelessWidget {
                   const SizedBox(height: 4.0),
                   // Description
                   Text(
-                    article.description,
+                    product.description,
                     style: TextStyle(fontSize: 13, color: Colors.grey[700]),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,

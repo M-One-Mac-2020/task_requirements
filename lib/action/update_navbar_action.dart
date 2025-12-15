@@ -7,9 +7,7 @@ class UpdateNavbarAction extends Action<NavbarState> {
   UpdateNavbarAction({required this.newIndex});
 
   @override
-  // The 'reduce' function returns a new, rebuilt instance of NavbarState
   NavbarState reduce() {
-    // We use the BuiltValue's rebuild method to create the new immutable state
     return state.rebuild((b) => b.currentIndex = newIndex);
   }
 }

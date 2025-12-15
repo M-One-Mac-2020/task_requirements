@@ -1,29 +1,34 @@
 import 'package:dash_kit_core/dash_kit_core.dart';
 import 'package:flutter/material.dart';
-import 'package:task_requirements/action/news/load_articles_action.dart';
-import 'package:task_requirements/core/service/api/api_service.dart';
+import 'package:task_requirements/action/load_products_action.dart';
+import 'package:task_requirements/action/update_navbar_action.dart';
+import 'package:task_requirements/core/service/api_service.dart';
 import 'package:task_requirements/core/service/firebase_service.dart';
 import 'package:task_requirements/core/service/notification/notification_service.dart';
+import 'package:task_requirements/core/service/product_service.dart';
+import 'package:task_requirements/screens/navbar_screen.dart';
 import 'package:task_requirements/state/news/news_state.dart';
 import 'package:task_requirements/widgets/news_card.dart';
 import 'package:async_redux/async_redux.dart';
-import '../core/models/alticle.dart';
+import '../core/models/product.dart';
 
-class NewsScreen extends StatefulWidget {
-  const NewsScreen({super.key});
+class ProductsScreen extends StatefulWidget {
+  final NavbarViewModel navbarViewModel;
+
+  const ProductsScreen({super.key, required this.navbarViewModel});
 
   @override
-  State<NewsScreen> createState() => _NewsScreenState();
+  State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _ProductsScreenState extends State<ProductsScreen> {
   late Store<NewsState> store;
   final apiService = ApiService();
 
   @override
   void initState() {
     store = Store<NewsState>(initialState: NewsState.initial());
-    store.dispatch(LoadArticlesAction(apiService));
+    store.dispatch(LoadProductsAction(apiService));
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // newsProvider.loadArticles();
       await FirebaseService.initializeFirebase();
@@ -68,7 +73,14 @@ class _NewsScreenState extends State<NewsScreen> {
             return ListView.builder(
               itemCount: articles.length,
               itemBuilder: (context, index) {
-                return NewsCard(article: articles[index]);
+                return InkWell(
+                  onTap: () {
+                    ProductService.instance.updateSelectedProductId(articles[index].id);
+
+                    widget.navbarViewModel.dispatch(UpdateNavbarAction(newIndex: 1));
+                  },
+                  child: NewsCard(product: articles[index]),
+                );
               },
             );
           },
@@ -79,13 +91,13 @@ class _NewsScreenState extends State<NewsScreen> {
 }
 
 class _NewsScreenViewModel {
-  final List<Article> articles;
+  final List<Product> articles;
   final bool isLoading;
 
   _NewsScreenViewModel({required this.articles, required this.isLoading});
 
   factory _NewsScreenViewModel.fromStore(Store<NewsState> store) {
-    final loadingState = store.state.getOperationState(Operation.loadArticles);
+    final loadingState = store.state.getOperationState(LoadProductsOperation.loadProducts);
 
     return _NewsScreenViewModel(
       articles: store.state.articles.toList(), // Convert BuiltList back to List

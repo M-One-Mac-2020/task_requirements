@@ -1,41 +1,46 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'news_state.dart';
+part of 'product_details_state.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-class _$NewsState extends NewsState {
+class _$ProductDetailsState extends ProductDetailsState {
   @override
-  final BuiltList<Product> articles;
+  final Product product;
   @override
   final BuiltMap<Object, OperationState> operationsState;
 
-  factory _$NewsState([void Function(NewsStateBuilder)? updates]) =>
-      (NewsStateBuilder()..update(updates))._build();
+  factory _$ProductDetailsState([
+    void Function(ProductDetailsStateBuilder)? updates,
+  ]) => (ProductDetailsStateBuilder()..update(updates))._build();
 
-  _$NewsState._({required this.articles, required this.operationsState})
-    : super._();
+  _$ProductDetailsState._({
+    required this.product,
+    required this.operationsState,
+  }) : super._();
   @override
-  NewsState rebuild(void Function(NewsStateBuilder) updates) =>
-      (toBuilder()..update(updates)).build();
+  ProductDetailsState rebuild(
+    void Function(ProductDetailsStateBuilder) updates,
+  ) => (toBuilder()..update(updates)).build();
 
   @override
-  NewsStateBuilder toBuilder() => NewsStateBuilder()..replace(this);
+  ProductDetailsStateBuilder toBuilder() =>
+      ProductDetailsStateBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is NewsState &&
-        articles == other.articles &&
+    return other is ProductDetailsState &&
+        product == other.product &&
         operationsState == other.operationsState;
   }
 
   @override
   int get hashCode {
     var _$hash = 0;
-    _$hash = $jc(_$hash, articles.hashCode);
+    _$hash = $jc(_$hash, product.hashCode);
     _$hash = $jc(_$hash, operationsState.hashCode);
     _$hash = $jf(_$hash);
     return _$hash;
@@ -43,20 +48,20 @@ class _$NewsState extends NewsState {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper(r'NewsState')
-          ..add('articles', articles)
+    return (newBuiltValueToStringHelper(r'ProductDetailsState')
+          ..add('product', product)
           ..add('operationsState', operationsState))
         .toString();
   }
 }
 
-class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
-  _$NewsState? _$v;
+class ProductDetailsStateBuilder
+    implements Builder<ProductDetailsState, ProductDetailsStateBuilder> {
+  _$ProductDetailsState? _$v;
 
-  ListBuilder<Product>? _articles;
-  ListBuilder<Product> get articles =>
-      _$this._articles ??= ListBuilder<Product>();
-  set articles(ListBuilder<Product>? articles) => _$this._articles = articles;
+  Product? _product;
+  Product? get product => _$this._product;
+  set product(Product? product) => _$this._product = product;
 
   MapBuilder<Object, OperationState>? _operationsState;
   MapBuilder<Object, OperationState> get operationsState =>
@@ -64,12 +69,12 @@ class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
   set operationsState(MapBuilder<Object, OperationState>? operationsState) =>
       _$this._operationsState = operationsState;
 
-  NewsStateBuilder();
+  ProductDetailsStateBuilder();
 
-  NewsStateBuilder get _$this {
+  ProductDetailsStateBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _articles = $v.articles.toBuilder();
+      _product = $v.product;
       _operationsState = $v.operationsState.toBuilder();
       _$v = null;
     }
@@ -77,37 +82,39 @@ class NewsStateBuilder implements Builder<NewsState, NewsStateBuilder> {
   }
 
   @override
-  void replace(NewsState other) {
-    _$v = other as _$NewsState;
+  void replace(ProductDetailsState other) {
+    _$v = other as _$ProductDetailsState;
   }
 
   @override
-  void update(void Function(NewsStateBuilder)? updates) {
+  void update(void Function(ProductDetailsStateBuilder)? updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  NewsState build() => _build();
+  ProductDetailsState build() => _build();
 
-  _$NewsState _build() {
-    _$NewsState _$result;
+  _$ProductDetailsState _build() {
+    _$ProductDetailsState _$result;
     try {
       _$result =
           _$v ??
-          _$NewsState._(
-            articles: articles.build(),
+          _$ProductDetailsState._(
+            product: BuiltValueNullFieldError.checkNotNull(
+              product,
+              r'ProductDetailsState',
+              'product',
+            ),
             operationsState: operationsState.build(),
           );
     } catch (_) {
       late String _$failedField;
       try {
-        _$failedField = 'articles';
-        articles.build();
         _$failedField = 'operationsState';
         operationsState.build();
       } catch (e) {
         throw BuiltValueNestedFieldError(
-          r'NewsState',
+          r'ProductDetailsState',
           _$failedField,
           e.toString(),
         );

@@ -13,19 +13,15 @@ abstract class NavbarState implements Built<NavbarState, NavbarStateBuilder>, Gl
     return NavbarState(
       (b) => b
         ..currentIndex = 0
-        ..operationsState = BuiltMap<Object, OperationState>().toBuilder(), // REQUIRED
+        ..operationsState = BuiltMap<Object, OperationState>().toBuilder(),
     );
   }
 
-  // --- APPLICATION DATA FIELD ---
   int get currentIndex;
 
-  // --- GLOBAL STATE REQUIREMENTS (IMPLEMENTATION) ---
-
   @override
-  BuiltMap<Object, OperationState> get operationsState; // REQUIRED GETTER
+  BuiltMap<Object, OperationState> get operationsState;
 
-  // REQUIRED METHOD (Implementation uses BuiltValue's rebuild)
   @override
   T updateOperation<T extends GlobalState>(Object? operationKey, OperationState operationState) {
     if (operationKey == null) {
@@ -36,7 +32,6 @@ abstract class NavbarState implements Built<NavbarState, NavbarStateBuilder>, Gl
     return newState as T;
   }
 
-  // REQUIRED METHOD
   @override
   OperationState getOperationState(Object operationKey) {
     return operationsState[operationKey] ?? OperationState.idle;

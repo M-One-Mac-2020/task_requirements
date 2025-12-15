@@ -1,36 +1,31 @@
+import 'package:task_requirements/core/models/product.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:dash_kit_core/dash_kit_core.dart';
-import 'package:task_requirements/core/models/product.dart';
 
-part 'news_state.g.dart';
+part 'product_details_state.g.dart';
 
-enum LoadProductsOperation { loadProducts }
-
-// The implementation uses BuiltValue syntax
-abstract class NewsState implements Built<NewsState, NewsStateBuilder>, GlobalState {
+abstract class ProductDetailsState
+    implements Built<ProductDetailsState, ProductDetailsStateBuilder>, GlobalState {
   // BuiltValue boilerplate
-  factory NewsState([void Function(NewsStateBuilder) updates]) = _$NewsState;
+  factory ProductDetailsState([void Function(ProductDetailsStateBuilder) updates]) =
+      _$ProductDetailsState;
 
-  NewsState._();
+  ProductDetailsState._();
 
-  // Initial State: Data fields should have default values
-  factory NewsState.initial() {
-    return NewsState(
+  factory ProductDetailsState.initial() {
+    return ProductDetailsState(
       (b) => b
-        ..articles.replace([]) // Initial empty list
+        ..product = Product.empty()
         ..operationsState = BuiltMap<Object, OperationState>().toBuilder(),
     );
   }
 
-  // --- APPLICATION DATA FIELDS ---
-  BuiltList<Product> get articles; // Use BuiltList for immutable collections
+  Product get product;
 
-  // --- GLOBAL STATE REQUIREMENTS ---
   @override
   BuiltMap<Object, OperationState> get operationsState;
 
-  // Implementation required by GlobalState (uses BuiltValue's rebuild)
   @override
   T updateOperation<T extends GlobalState>(Object? operationKey, OperationState operationState) {
     if (operationKey == null) {

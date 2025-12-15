@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_requirements/screens/navbar_screen.dart';
-import 'package:task_requirements/screens/news_screen.dart';
+import 'package:task_requirements/screens/products_screen.dart';
 
 void main() {
   runApp(const MyApp());

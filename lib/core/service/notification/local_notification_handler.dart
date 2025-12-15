@@ -8,7 +8,7 @@ class LocalNotificationHandler {
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel',
     'High Importance Notifications',
-    description: 'This channel is used for important news notifications.',
+    description: 'This channel is used for important product notifications.',
     importance: Importance.max,
   );
 
